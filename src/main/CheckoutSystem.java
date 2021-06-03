@@ -1,5 +1,9 @@
 package main;
 
+import concrete.BkashPaymentStrategy;
+import concrete.CODPaymentStrategy;
+import concrete.CreditCardPaymentStrategy;
+import concrete.NagadPaymentStrategy;
 import methods.PaymentMethods;
 
 public class CheckoutSystem {
@@ -10,13 +14,19 @@ public class CheckoutSystem {
         String selectedMethod = "COD";
 
         if (selectedMethod.equals("Bkash")){
-            paymentMethods.setSelectedPaymentMethod("Bkash");
-            paymentMethods.pay();
-        }else if (orderAmount >= 1000 && selectedMethod.equals("COD")){
-            paymentMethods.setSelectedPaymentMethod("COD");
-            paymentMethods.pay();
-        }else {
-            System.out.println("Sorry!!Minimum 1000 tk. order is required for COD");
+            paymentMethods.setPaymentStrategy(new BkashPaymentStrategy());
+            paymentMethods.executeStrategy();
+        }else if (selectedMethod.equals("Nagad")) {
+            paymentMethods.setPaymentStrategy(new NagadPaymentStrategy());
+            paymentMethods.executeStrategy();
+        } else if (selectedMethod.equals("Card")) {
+            paymentMethods.setPaymentStrategy(new CreditCardPaymentStrategy());
+            paymentMethods.executeStrategy();
+        } else if (orderAmount >= 500 && selectedMethod.equals("COD")) {
+            paymentMethods.setPaymentStrategy(new CODPaymentStrategy());
+            paymentMethods.executeStrategy();
+        } else {
+            System.out.println("Sorry! Minimum 500tk order is required for COD");
         }
     }
 }
