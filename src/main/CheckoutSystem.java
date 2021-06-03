@@ -1,3 +1,7 @@
+package main;
+
+import methods.PaymentMethods;
+
 public class CheckoutSystem {
     public static void main(String[] args) {
         PaymentMethods paymentMethods = new PaymentMethods();

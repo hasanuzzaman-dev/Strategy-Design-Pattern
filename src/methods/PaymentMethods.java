@@ -1,3 +1,5 @@
+package methods;
+
 public class PaymentMethods {
 
     private String selectedPaymentMethod;
